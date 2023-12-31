@@ -1,7 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-const { connectDB } = require("./libs/database");
+const { connectDB } = require("./src/libs/database");
 require("dotenv").config();
 
 const app = express();
@@ -28,5 +28,5 @@ app.listen(process.env.PORT, () => {
 
 // healthCheck
 app.get("/", async (req, res) => {
-  res.status(200).json("서버 연결에 성공하였습니다");
+  res.json("서버 연결에 성공하였습니다");
 });
