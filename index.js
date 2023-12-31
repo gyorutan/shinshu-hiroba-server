@@ -27,6 +27,6 @@ app.listen(process.env.PORT, () => {
 });
 
 // healthCheck
-app.get("/", async (res) => {
+app.get("/", async (req, res) => {
   res.status(200).json("서버 연결에 성공하였습니다");
 });
