@@ -1,10 +1,9 @@
 const {
   signUp,
   logIn,
-  signOut,
   checkUsername,
   checkStudentId,
-} = require("../services/authService");
+} = require("../auth/auth.service");
 
 exports.signUp = async (req, res) => {
   const body = await req.body;
@@ -13,11 +12,7 @@ exports.signUp = async (req, res) => {
 
 exports.logIn = async (req, res) => {
   const body = await req.body;
-  return logIn(res, body);
-};
-
-exports.signOut = (req, res) => {
-  return signOut(req, res);
+  return await logIn(res, body);
 };
 
 exports.checkUsername = async (req, res) => {

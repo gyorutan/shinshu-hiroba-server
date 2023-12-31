@@ -11,7 +11,6 @@ exports.authGuard = (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
-    res.clearCookie("user_token");
     return res.json({ success: false, message: "Unauthorized" });
   }
 };

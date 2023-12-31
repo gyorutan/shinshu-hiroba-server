@@ -1,10 +1,5 @@
 const router = require("express").Router();
-const {
-  create,
-  remove,
-  fetch,
-  update,
-} = require("../controllers/postController");
+const { create, remove, fetch, update } = require("../post/post.controller");
 const { authGuard } = require("../middlewares/auth");
 
 router.post("/create", authGuard, create);

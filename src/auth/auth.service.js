@@ -5,8 +5,6 @@ const jwt = require("jsonwebtoken");
 exports.signUp = async (res, body) => {
   try {
     const { sei, mei, username, studentId, password } = body;
-    const user = await User.findOne({ studentId });
-    console.log(user);
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -20,9 +18,11 @@ exports.signUp = async (res, body) => {
       password: hashedPassword,
     });
 
-    console.log(createdUser);
-
-    return res.json({ success: true, message: "회원가입에 성공하였습니다" });
+    return res.json({
+      success: true,
+      message: "회원가입에 성공하였습니다",
+      createdUser,
+    });
   } catch (error) {
     console.log(error);
     return res.json({ success: false, message: "서버 오류" });
@@ -34,8 +34,6 @@ exports.logIn = async (res, body) => {
     const { studentId, password } = body;
 
     const user = await User.findOne({ studentId });
-
-    console.log(user);
 
     if (!user) {
       return res.json({ success: false, message: "등록된 학번이 아닙니다" });
@@ -71,14 +69,8 @@ exports.logIn = async (res, body) => {
   }
 };
 
-exports.signOut = (req, res) => {
-  return res.send("Good");
-};
-
 exports.checkUsername = async (res, value) => {
   const user = await User.findOne({ username: value });
-
-  console.log(user);
 
   if (user) {
     return res.json({ success: false, result: "unavailable-username" });
@@ -89,8 +81,6 @@ exports.checkUsername = async (res, value) => {
 
 exports.checkStudentId = async (res, value) => {
   const user = await User.findOne({ studentId: value });
-
-  console.log(user);
 
   if (user) {
     return res.json({ success: false, result: "unavailable-studentId" });
