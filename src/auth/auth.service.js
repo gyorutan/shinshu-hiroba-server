@@ -20,7 +20,7 @@ exports.signUp = async (res, body) => {
 
     return res.json({
       success: true,
-      message: "회원가입에 성공하였습니다",
+      message: "회원가입에 성공했습니다",
       createdUser,
     });
   } catch (error) {
