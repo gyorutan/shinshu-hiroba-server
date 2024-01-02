@@ -36,7 +36,10 @@ exports.logIn = async (res, body) => {
     const user = await User.findOne({ studentId });
 
     if (!user) {
-      return res.json({ success: false, message: "등록된 학번이 아닙니다" });
+      return res.json({
+        success: false,
+        message: "학번 또는 비밀번호가 일치하지 않습니다",
+      });
     }
 
     const comparePassword = await bcrypt.compare(password, user.password);
@@ -44,7 +47,7 @@ exports.logIn = async (res, body) => {
     if (!comparePassword) {
       return res.json({
         success: false,
-        message: "비밀번호가 일치하지 않습니다",
+        message: "학번 또는 비밀번호가 일치하지 않습니다",
       });
     }
 
